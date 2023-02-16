@@ -5,6 +5,8 @@ const fs = require('fs')
 const app = express()
 
 app.use(express.static(path.join(__dirname,'public')))
+app.use(express.static(path.join(__dirname,'resoruces')))
+app.use(express.static(path.join(__dirname,'views')))
 
 //setters
 app.set('port',process.env.PORT || 3000 )
@@ -16,7 +18,7 @@ app.use(express.urlencoded({extended:false}));
 //middleware
 app.use('/',require('./routes/index'))
 
-app.use(express.static(path.join(__dirname,'./public')))
+
 
 
 app.listen(app.get('port'),()=>console.log(`Listen ${app.get('port')}`))

@@ -1,20 +1,20 @@
 const route = require('express').Router()
 'use strict'
 const fs = require('fs')
+const query = fs.readFileSync('./data.json')
+const temp = JSON.parse(query)
 
-
+//Routes
 route.get('/', (req, res) => {
     res.render('index', { title: "Home :: SGRC" })
 })
-
-//Routes
 
 route.get('/newEntry', (req, res) => {
     res.render('insert', { title: "Agregar reserva de auto" })
 })
 
 route.get('/searchEntry', (req, res) => {
-    res.render('search', { title: "Buscar reserva de auto" })
+    res.render('search', { title: "Buscar reserva de auto",'temp':temp})
 })
 
 route.get('/editEntry', (req, res) => {
@@ -28,9 +28,6 @@ route.get('/delEntry', (req, res) => {
 //Insert data
 route.post('/', (req, res) => {
     const { persons, car, dateBooking, dateDelivery, observations } = req.body
-    const query = fs.readFileSync('./data.json')
-    const temp = JSON.parse(query)
-    
     const id = temp[temp.length - 1].id+1;
 
     const data = {
@@ -43,8 +40,8 @@ route.post('/', (req, res) => {
     }
     
     //validate the data
-    
-    
+
+    console.log(temp.length) 
 
     //write the data
     temp.push(data)

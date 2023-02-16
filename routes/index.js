@@ -1,8 +1,7 @@
 const route = require('express').Router()
+'use strict'
+const fs = require('fs')
 
-fetch('http://localhost:3000/data.json')
-    .then((response) => response.json())
-    .then((json) => console.log(json));
 
 route.get('/', (req, res) => {
     res.render('index', { title: "Home :: SGRC" })
@@ -26,22 +25,32 @@ route.get('/delEntry', (req, res) => {
     res.render('delete', { title: "Eliminar reserva de auto" })
 })
 
-//Show data
-
+//Insert data
 route.post('/', (req, res) => {
     const { persons, car, dateBooking, dateDelivery, observations } = req.body
+    const query = fs.readFileSync('./data.json')
+    const temp = JSON.parse(query)
+    
+    const id = temp[temp.length - 1].id+1;
 
-    json.push({
-        "persons": persons,
-        "car": car,
-        "booking": dateBooking,
-        "delivery": dateDelivery,
-        "observations": observations
-    })
+    const data = {
+        'id': id,
+        'persons': persons,
+        'car': car,
+        'booking': dateBooking,
+        'delivery': dateDelivery,
+        'observations': observations
+    }
+    
+    //validate the data
+    
+    
 
-    console.log(`${persons} ${car} ${dateBooking} ${dateDelivery} ${observations}`)
-    console.log("debieron ingresar")
+    //write the data
+    temp.push(data)
+    fs.writeFileSync('./data.json', JSON.stringify(temp,null,2))
 
+    //to home
     res.redirect('/')
 })
 module.exports = route;

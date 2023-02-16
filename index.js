@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const fs = require('fs')
 
 const app = express()
 
@@ -16,7 +17,6 @@ app.use(express.urlencoded({extended:false}));
 app.use('/',require('./routes/index'))
 
 app.use(express.static(path.join(__dirname,'./public')))
-app.use(express.static(path.join(__dirname,'./resources')))
 
 
 app.listen(app.get('port'),()=>console.log(`Listen ${app.get('port')}`))

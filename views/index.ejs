@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%-include('./templates/header')%>
+</head>
+
+<body>
+    <div class="container-fluid position-absolute top-50 start-50 translate-middle">
+        <div class="container my-5 text-center rounded border border-dark back px-3 py-5">
+            <h1 class="text-center">Bienvenido al sistema de prestamo de camionetas</h1><hr>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Agregar reserva</h3>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Agregar reserva de caminoneta</h5>
+                            <p class="card-text">Módulo de registro de reserva de camioneta</p>
+                            <a href="/newEntry" class="btn btn-success w-50"><i class="fas fa-plus"></i>  Reservar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Consultar reservas</h3>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Consultar reserva de caminoneta</h5>
+                            <p class="card-text">Módulo de consulta de reserva de camioneta</p>
+                            <a href="searchEntry" class="btn btn-primary w-50"><i class="fas fa-search"></i>  Consultar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Editar reserva</h3>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Edición de reserva de caminoneta</h5>
+                            <p class="card-text">Módulo de edición de reserva de camioneta</p>
+                            <a href="editEntry" class="btn btn-warning w-50"><i class="fas fa-edit"></i>  Editar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Eliminar reserva</h3>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Eliminar reserva de caminoneta</h5>
+                            <p class="card-text">Módulo de eliminación de reserva de camioneta</p>
+                            <a href="delEntry" class="btn btn-danger w-50"><i class="fas fa-trash"></i>  Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div><hr>
+            <p class="pt-4 fs-5">Hecho por: Diego Alejandro Corredor Rojas 202114825</p>
+            <p class="fs-5">Hecho para: Electiva II - Desarrollo web. Ing. Jairo Riaño</p>
+            <p class="fs-5">UPTC Seccional Sogamoso - 2023 &copy;</p>
+        </div>
+    </div>
+    <%-include('./templates/footer')%>
+</body>
+
+</html>

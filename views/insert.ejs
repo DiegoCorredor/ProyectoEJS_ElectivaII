@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('./templates/header')%>
+</head>
+
+<body>
+    <div class="container-fluid position-absolute top-50 start-50 translate-middle">
+        <div class="container my-5 text-center rounded border border-dark back px-3 py-5">
+            <h1 class="text-center">Registro de reserva de prestamo</h1>
+            <hr>
+            <p class="fs-5">Ingrese por favor los datos a continuación para realizar su reserva.</p>
+            <form action="/" method="POST">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="mb-3 text-start">
+                            <label for="persons" class="form-label">Persona que solicita</label>
+                            <select name="persons" id="persons" class="form-control" >
+                                <option value="">Seleccione una opción...</option>
+                                <option value="German Corredor">German Corredor</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="mb-3 text-start">
+                            <label for="car" class="form-label">Auto que solicita</label>
+                            <select name="car" id="car" class="form-control" >
+                                <option value="">Seleccione una opción...</option>
+                                <option value="GXR-426">GXR-426</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="mb-3 text-start">
+                            <label for="dateBooking" class="form-label">Fecha de préstamo</label>
+                            <input type="datetime-local" class="form-control" name="dateBooking" id="dateBooking">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="mb-3 text-start">
+                            <label for="dateDelivery" class="form-label">Fecha de entrega</label>
+                            <input type="datetime-local" class="form-control" name="dateDelivery" id="dateDelivery">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="mb-3 text-start">
+                            <label for="observations" class="form-label">Observaciones adicionales</label>
+                            <textarea class="form-control" name="observations" id="observations" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="/" class="btn btn-primary"><i class="fas fa-home"></i>  Inicio</a>
+                    <a href="newEntry" class="btn btn-warning"><i class="fas fa-eraser"></i>  Limpiar</a>
+                    <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i>  Realizar reserva</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <%-include('./templates/footer')%>
+</body>
+
+</html>

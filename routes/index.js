@@ -14,7 +14,7 @@ route.get('/newEntry', (req, res) => {
 })
 
 route.get('/searchEntry', (req, res) => {
-    res.render('search', { title: "Buscar reserva de auto",'temp':temp})
+    res.render('search', { title: "Buscar reserva de auto", 'temp': temp })
 })
 
 route.get('/editEntry', (req, res) => {
@@ -28,7 +28,7 @@ route.get('/delEntry', (req, res) => {
 //Insert data
 route.post('/', (req, res) => {
     const { persons, car, dateBooking, dateDelivery, observations } = req.body
-    const id = temp[temp.length - 1].id+1;
+    const id = temp[temp.length - 1].id + 1;
 
     const data = {
         'id': id,
@@ -38,16 +38,33 @@ route.post('/', (req, res) => {
         'delivery': dateDelivery,
         'observations': observations
     }
-    
+
     //validate the data
+    let flag = true
+    temp.forEach(temp => {
+        if (dateBooking == temp["booking"] && car == temp["car"]) {
+            console.log("Fecha y auto ocupado, seleccione otra")
+            flag = false
+        }else{
+            console.log("No repetido")
+        }
+    })
 
-    console.log(temp.length) 
 
-    //write the data
-    temp.push(data)
-    fs.writeFileSync('./data.json', JSON.stringify(temp,null,2))
+    if (flag == false) {
+        console.log("Fecha y auto ocupado, seleccione otra")
+    } else {
+        console.log(temp.length)
 
-    //to home
-    res.redirect('/')
+        //write the data
+        temp.push(data)
+        fs.writeFileSync('./data.json', JSON.stringify(temp, null, 2))
+
+        //to home
+        res.redirect('/')
+    }
+
+
+
 })
 module.exports = route;

@@ -3,6 +3,7 @@ const route = require('express').Router()
 const fs = require('fs')
 const query = fs.readFileSync('./data.json')
 const temp = JSON.parse(query)
+var obj;
 
 //Routes
 route.get('/', (req, res) => {
@@ -10,19 +11,31 @@ route.get('/', (req, res) => {
 })
 
 route.get('/newEntry', (req, res) => {
-    res.render('insert', { title: "Agregar reserva de auto" })
+    res.render('insert', { title: "Agregar reserva de auto :: SGRC" })
 })
 
 route.get('/searchEntry', (req, res) => {
-    res.render('search', { title: "Buscar reserva de auto", 'temp': temp })
+    res.render('search', { title: "Buscar reserva de auto :: SGRC", 'temp': temp })
 })
 
 route.get('/editEntry', (req, res) => {
-    res.render('edit', { title: "Editar reserva de auto" })
+    res.render('edit', { title: "Editar reserva de auto :: SGRC", "temp":temp,"obj":obj})
+
 })
 
 route.get('/delEntry', (req, res) => {
-    res.render('delete', { title: "Eliminar reserva de auto" })
+    res.render('delete', { title: "Eliminar reserva de auto :: SGRC","temp":temp })
+})
+
+route.post('/juanita',(res,req)=>{
+    console.log(res)
+    temp.forEach(t=>{
+        if(t.id==res.data){
+            obj=t
+        }
+    })
+    
+
 })
 
 //Insert data

@@ -3,8 +3,24 @@
     "id": 0,
     "persons": "Nombre Persona",
     "car": "XXX-999",
-    "booking": "Día/Mes/Año/HH:MM M",
-    "delivery": "Día/Mes/Año/HH:MM M",
+    "booking": "AAAA/MM/DDT24H",
+    "delivery": "AAAA/MM/DDT24H",
     "observations": "Consideraciones adicionales de la persona"
+  },
+  {
+    "id": 1,
+    "persons": "ALBINO NIÑO",
+    "car": "GSQ-851",
+    "booking": "2023-02-18T20:00",
+    "delivery": "2023-02-18T21:00",
+    "observations": ""
+  },
+  {
+    "id": 2,
+    "persons": "ALBINO NIÑO",
+    "car": "GSS-362",
+    "booking": "2023-02-19T20:00",
+    "delivery": "2023-02-19T21:00",
+    "observations": ""
   }
 ]

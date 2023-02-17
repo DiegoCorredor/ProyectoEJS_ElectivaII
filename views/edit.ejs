@@ -11,13 +11,13 @@
             <h1 class="text-center">Editar prestamo</h1>
             <hr>
             <p class="fs-5">Eliga por favor su reserva a editar y seleccione buscar.</p>
-            <form action="/juanita" method="post">
+            <form action="/editData" method="post">
                 <div class="row text-start">
                     <div class="col-2">
                         <label for="person" class="form-label fs-5">Persona que solicita</label>
                     </div>
                     <div class="col-7">
-                        <select name="person" id="person" class="form-control" >
+                        <select name="person" id="person" class="form-control" onclick="editing()">
                             <option value="">Seleccione una opción...</option>
                             <%temp.forEach(t=>{%>
                                 <option value="<%=t.id%>"><%=t.id%> -- <%=t.persons%> -- <%=t.car%></option>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </form><hr>
-            <form action="/" method="POST">
+            <form action="/saving" method="POST">
                 <div class="row">
                     <div class="col-4">
                         <div class="mb-3 text-start">
@@ -73,7 +73,6 @@
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a href="/" class="btn btn-primary"><i class="fas fa-home"></i>  Inicio</a>
-                    <a href="newEntry" class="btn btn-warning"><i class="fas fa-eraser"></i>  Limpiar</a>
                     <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i>  Editar reserva</button>
                 </div>
             </form>

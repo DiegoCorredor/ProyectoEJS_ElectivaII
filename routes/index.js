@@ -19,30 +19,20 @@ route.get('/searchEntry', (req, res) => {
 })
 
 route.get('/editEntry', (req, res) => {
-    res.render('edit', { title: "Editar reserva de auto :: SGRC", "temp":temp,"obj":obj})
+    res.render('edit', { title: "Editar reserva de auto :: SGRC", "temp": temp, "obj": obj })
 
 })
 
 route.get('/delEntry', (req, res) => {
-    res.render('delete', { title: "Eliminar reserva de auto :: SGRC","temp":temp })
+    res.render('delete', { title: "Eliminar reserva de auto :: SGRC", "temp": temp })
 })
 
-route.post('/juanita',(res,req)=>{
-    console.log(res)
-    temp.forEach(t=>{
-        if(t.id==res.data){
-            obj=t
-        }
-    })
-    
 
-})
 
 //Insert data
-route.post('/', (req, res) => {
+route.post('/addBooking', (req, res) => {
     const { persons, car, dateBooking, dateDelivery, observations } = req.body
     const id = temp[temp.length - 1].id + 1;
-
     const data = {
         'id': id,
         'persons': persons,
@@ -56,18 +46,13 @@ route.post('/', (req, res) => {
     let flag = true
     temp.forEach(temp => {
         if (dateBooking == temp["booking"] && car == temp["car"]) {
-            console.log("Fecha y auto ocupado, seleccione otra")
             flag = false
-        }else{
-            console.log("No repetido")
         }
     })
-
 
     if (flag == false) {
         console.log("Fecha y auto ocupado, seleccione otra")
     } else {
-        console.log(temp.length)
 
         //write the data
         temp.push(data)
@@ -76,8 +61,34 @@ route.post('/', (req, res) => {
         //to home
         res.redirect('/')
     }
-
-
-
 })
+
+
+//Edit data
+route.post('/editData',(req,res)=>{
+    const {person} = req.body
+    console.log(person)
+
+    route.post('/saving',(req,res)=>{
+        console.log('entre al segundo post que emocion')
+
+        res.redirect('/')
+    })
+
+
+    
+})
+/*
+route.post('/editData', (res, req) => {
+    console.log(res)
+    temp.forEach(t => {
+        if (t.id == res.data) {
+            obj = t
+        }
+    })
+
+
+})*/
+
+
 module.exports = route;

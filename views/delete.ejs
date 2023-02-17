@@ -8,73 +8,77 @@
 <body>
     <div class="container-fluid position-absolute top-50 start-50 translate-middle">
         <div class="container my-5 text-center rounded border border-dark back px-3 py-5">
-            <h1 class="text-center">Editar prestamo</h1>
+            <h1 class="text-center">Eliminar prestamo</h1>
             <hr>
-            <hr>
-            <p class="fs-5">Ingrese por favor los datos a continuación para realizar su reserva.</p>
+            <p class="fs-5">Eliga por favor su reserva a eliminar y seleccione buscar.</p>
             <form action="/juanita" method="post">
-                <div class="mb-3 text-start">
-                    <label for="person" class="form-label">Persona que solicita</label>
-                    <select name="person" id="person" class="form-control" >
-                        <option value="">Seleccione una opción...</option>
-                        <%temp.forEach(t=>{%>
-                            <option value="<%=t.id%>"><%=t.id%> -- <%=t.persons%> -- <%=t.car%></option>
-                        <%})%>
-                    </select>
-                    <br>
-                    <button class="btn btn-primary" type="submit">Consultar</button>
+                <div class="row text-start">
+                    <div class="col-2">
+                        <label for="person" class="form-label fs-5">Persona que solicita</label>
+                    </div>
+                    <div class="col-7">
+                        <select name="person" id="person" class="form-control" >
+                            <option value="">Seleccione una opción...</option>
+                            <%temp.forEach(t=>{%>
+                                <option value="<%=t.id%>"><%=t.id%> -- <%=t.persons%> -- <%=t.car%></option>
+                            <%})%>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-primary w-100" type="submit"><i class="fas fa-search"></i>  Consultar</button>
+                    </div>
                 </div>
-            </form>
+            </form><hr>
             <form action="/" method="POST">
                 <div class="row">
                     <div class="col-4">
                         <div class="mb-3 text-start">
                             <label for="persons" class="form-label">Persona que solicita</label>
                             <select name="persons" id="persons" class="form-control" disabled>
-                                <option value="">hola</option>
+                                <option value="">Seleccione una opción...</option>
+                                <option value="ALBINO NIÑO">ALBINO NIÑO</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-2">
                         <div class="mb-3 text-start">
                             <label for="car" class="form-label">Auto que solicita</label>
-                            <select name="car" id="car" class="form-control" >
-                                <option value="">Seleccione una opción...</option>
-                                <option value="GXR-426">GXR-426</option>
+                            <select name="car" id="car" class="form-control" disabled>
+                                <option value="">XXX-999</option>
+                                <option value="GSQ-851">GSQ-851</option>
+                                <option value="GSS-362">GSS-362</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="mb-3 text-start">
                             <label for="dateBooking" class="form-label">Fecha de préstamo</label>
-                            <input type="datetime-local" class="form-control" name="dateBooking" id="dateBooking">
+                            <input type="datetime-local" class="form-control" name="dateBooking" id="dateBooking" disabled>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="mb-3 text-start">
+                            <label for="dateDelivery" class="form-label">Fecha de entrega</label>
+                            <input type="datetime-local" class="form-control" name="dateDelivery" id="dateDelivery" disabled>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4">
-                        <div class="mb-3 text-start">
-                            <label for="dateDelivery" class="form-label">Fecha de entrega</label>
-                            <input type="datetime-local" class="form-control" name="dateDelivery" id="dateDelivery">
-                        </div>
-                    </div>
-                    <div class="col-8">
+                    <div class="col">
                         <div class="mb-3 text-start">
                             <label for="observations" class="form-label">Observaciones adicionales</label>
-                            <textarea class="form-control" name="observations" id="observations" rows="4"></textarea>
+                            <textarea class="form-control" name="observations" id="observations" rows="4" disabled></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a href="/" class="btn btn-primary"><i class="fas fa-home"></i>  Inicio</a>
-                    <a href="newEntry" class="btn btn-warning"><i class="fas fa-eraser"></i>  Limpiar</a>
-                    <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i>  Realizar reserva</button>
+                    <button type="submit" class="btn btn-danger"><i class="fas fa-delete"></i>  Eliminar reserva</button>
                 </div>
             </form>
             <hr>
         <%-include('./templates/authors')%>
         </div>
-        
     </div>
     <%-include('./templates/footer')%>
 </body>

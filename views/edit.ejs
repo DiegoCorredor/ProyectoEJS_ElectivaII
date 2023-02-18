@@ -3,87 +3,102 @@
 
 <head>
     <%-include('./templates/header')%>
-    <script>
-        function editing(){
-            var sel=document.getElementById('person')
-            var op = sel.options[sel.selectedIndex].value
-            alert(person.options.selectedIndex.value)
-        }
-    </script>
+        <script>
+            function editing() {
+                var valueId = document.getElementById('person').value
+                console.log(valueId)
+                return valueId
+            }
+        </script>
 </head>
 
 <body>
-    
+
     <div class="container-fluid position-absolute top-50 start-50 translate-middle">
         <div class="container my-5 text-center rounded border border-dark back px-3 py-5">
             <h1 class="text-center">Editar prestamo</h1>
             <hr>
             <p class="fs-5">Eliga por favor su reserva a editar y seleccione buscar.</p>
-                <div class="row text-start">
-                    <div class="col-2">
-                        <label for="person" class="form-label fs-5">Persona que solicita</label>
-                    </div>
-                    <div class="col-7">
-                        <select name="person[]" id="person" class="form-control" onchange="editing()">
-                            <option value="">Seleccione una opción...</option>
-                            <%temp.forEach(t=>{%>
-                                <option id="o" value="<%=t.car%>"><%=t.id%> -- <%=t.persons%> -- <%=t.car%></option>
+            <div class="row text-start">
+                <div class="col-2">
+                    <label for="person" class="form-label fs-5">Persona que solicita</label>
+                </div>
+                <div class="col-7">
+                    <select name="person" id="person" class="form-control" onchange="editing()">
+                        <option value="Seleccione una opción...">Seleccione una opción...</option>
+                        <%temp.forEach(t=>{%>
+                            <option value=<%=t.id%>><%=t.id%> -- <%=t.persons%> -- <%=t.car%>
+                            </option>
                             <%})%>
-                        </select>
-                    </div>
-                    <div class="col-3">
-                        <button class="btn btn-primary w-100"  onclick="editing()" ><i class="fas fa-search"></i>  Consultar</button>
-                    </div>
-                </div><hr>
-            <form action="/saving" method="POST">
-                <div class="row">
-                    <div class="col-4">
-                        <div class="mb-3 text-start">
-                            <label for="persons" class="form-label">Persona que solicita</label>
-                            <select name="persons" id="persons" class="form-control" disabled>
-                                <option value="">Seleccione una opción...</option>
-                                <option value="ALBINO NIÑO">ALBINO NIÑO</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="mb-3 text-start">
-                            <label for="car" class="form-label">Auto que solicita</label>
-                            <select name="car" id="car" class="form-control" >
-                                <option value="">XXX-999</option>
-                                <option value="GSQ-851">GSQ-851</option>
-                                <option value="GSS-362">GSS-362</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="mb-3 text-start">
-                            <label for="dateBooking" class="form-label">Fecha de préstamo</label>
-                            <input type="datetime-local" class="form-control" name="dateBooking" id="dateBooking">
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="mb-3 text-start">
-                            <label for="dateDelivery" class="form-label">Fecha de entrega</label>
-                            <input type="datetime-local" class="form-control" name="dateDelivery" id="dateDelivery">
-                        </div>
-                    </div>
+                    </select>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="mb-3 text-start">
-                            <label for="observations" class="form-label">Observaciones adicionales</label>
-                            <textarea class="form-control" name="observations" id="observations" rows="4"></textarea>
-                        </div>
-                    </div>
+                <div class="col-3">
+                    <button class="btn btn-primary w-100" onclick="editing()"><i class="fas fa-search"></i>
+                        Consultar</button>
                 </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="/" class="btn btn-primary"><i class="fas fa-home"></i>  Inicio</a>
-                    <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i>  Editar reserva</button>
-                </div>
-            </form>
+            </div>
             <hr>
-        <%-include('./templates/authors')%>
+            <%if(temp[1].id==1){%>
+                <form action="/editData" method="POST">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="mb-3 text-start">
+                                <label for="persons" class="form-label">Persona que solicita</label>
+                                <select name="persons" id="persons" class="form-control" disabled>
+                                    <option value=<%=temp.persons%>><%=temp[1].persons%>
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="mb-3 text-start">
+                                <label for="car" class="form-label">Auto que solicita</label>
+                                <select name="car" id="car" class="form-control">
+                                    <%temp.forEach(temp=>{%>
+                                        <option value=<%=temp.car%>><%=temp.car%>
+                                        </option>
+                                        <%})%>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="mb-3 text-start">
+                                <label for="dateBooking" class="form-label">Fecha de préstamo</label>
+                                <input type="datetime-local" class="form-control" name="dateBooking" id="dateBooking"
+                                    value="<%=temp[1].booking%>">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="mb-3 text-start">
+                                <label for="dateDelivery" class="form-label">Fecha de entrega</label>
+                                <input type="datetime-local" class="form-control" name="dateDelivery" id="dateDelivery"
+                                    value="<%=temp[1].delivery%>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3 text-start">
+                                <label for="observations" class="form-label">Observaciones adicionales</label>
+                                <textarea class="form-control" name="observations" id="observations"
+                                    rows="4"><%=temp[1].observations%></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <%}else{%>
+                        <div class="alert alert-danger alert-dismissible fade show text-center fs-5" role="alert">
+                            <p class=""><i class="fas fas-alert"></i> No hay resultados para su busqueda</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <%}%>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="/" class="btn btn-primary"><i class="fas fa-home"></i> Inicio</a>
+                            <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i> Editarreserva</button>
+                        </div>
+                </form>
+                <hr>
+                <%-include('./templates/authors')%>
         </div>
     </div>
     <%-include('./templates/footer')%>

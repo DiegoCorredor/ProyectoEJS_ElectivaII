@@ -9,20 +9,16 @@ var obj;
 route.get('/', (req, res) => {
     res.render('index', { title: "Home :: SGRC" })
 })
-
 route.get('/newEntry', (req, res) => {
     res.render('insert', { title: "Agregar reserva de auto :: SGRC" })
 })
-
 route.get('/searchEntry', (req, res) => {
     res.render('search', { title: "Buscar reserva de auto :: SGRC", 'temp': temp })
 })
-
 route.get('/editEntry', (req, res) => {
     res.render('edit', { title: "Editar reserva de auto :: SGRC", "temp": temp, "obj": obj })
 
 })
-
 route.get('/delEntry', (req, res) => {
     res.render('delete', { title: "Eliminar reserva de auto :: SGRC", "temp": temp })
 })
@@ -41,7 +37,6 @@ route.post('/addBooking', (req, res) => {
         'delivery': dateDelivery,
         'observations': observations
     }
-
     //validate the data
     let flag = true
     temp.forEach(temp => {
@@ -49,34 +44,23 @@ route.post('/addBooking', (req, res) => {
             flag = false
         }
     })
-
-    if (flag == false) {
-        console.log("Fecha y auto ocupado, seleccione otra")
-    } else {
-
+    if (flag != false) {
         //write the data
         temp.push(data)
         fs.writeFileSync('./data.json', JSON.stringify(temp, null, 2))
-
         //to home
         res.redirect('/')
     }
 })
 
-
 //Edit data
 route.post('/editData',(req,res)=>{
-    const {person} = req.body
-    console.log(person)
-
-    route.post('/saving',(req,res)=>{
-        console.log('entre al segundo post que emocion')
-
-        res.redirect('/')
-    })
-
+    
 
     
+
+
+    res.redirect('/')
 })
 /*
 route.post('/editData', (res, req) => {
@@ -90,8 +74,5 @@ route.post('/editData', (res, req) => {
 
 })*/
 
-function editing(){
-    alert("Hola mundo 2")
-}
 
 module.exports = route;

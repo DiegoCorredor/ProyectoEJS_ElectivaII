@@ -90,5 +90,8 @@ route.post('/editData', (res, req) => {
 
 })*/
 
+function editing(){
+    alert("Hola mundo 2")
+}
 
 module.exports = route;

@@ -3,32 +3,38 @@
 
 <head>
     <%-include('./templates/header')%>
+    <script>
+        function editing(){
+            var sel=document.getElementById('person')
+            var op = sel.options[sel.selectedIndex].value
+            alert(person.options.selectedIndex.value)
+        }
+    </script>
 </head>
 
 <body>
+    
     <div class="container-fluid position-absolute top-50 start-50 translate-middle">
         <div class="container my-5 text-center rounded border border-dark back px-3 py-5">
             <h1 class="text-center">Editar prestamo</h1>
             <hr>
             <p class="fs-5">Eliga por favor su reserva a editar y seleccione buscar.</p>
-            <form action="/editData" method="post">
                 <div class="row text-start">
                     <div class="col-2">
                         <label for="person" class="form-label fs-5">Persona que solicita</label>
                     </div>
                     <div class="col-7">
-                        <select name="person" id="person" class="form-control" onclick="editing()">
+                        <select name="person[]" id="person" class="form-control" onchange="editing()">
                             <option value="">Seleccione una opción...</option>
                             <%temp.forEach(t=>{%>
-                                <option value="<%=t.id%>"><%=t.id%> -- <%=t.persons%> -- <%=t.car%></option>
+                                <option id="o" value="<%=t.car%>"><%=t.id%> -- <%=t.persons%> -- <%=t.car%></option>
                             <%})%>
                         </select>
                     </div>
                     <div class="col-3">
-                        <button class="btn btn-primary w-100" type="submit"><i class="fas fa-search"></i>  Consultar</button>
+                        <button class="btn btn-primary w-100"  onclick="editing()" ><i class="fas fa-search"></i>  Consultar</button>
                     </div>
-                </div>
-            </form><hr>
+                </div><hr>
             <form action="/saving" method="POST">
                 <div class="row">
                     <div class="col-4">

@@ -103,27 +103,22 @@ route.post('/editData/:id',async (req,res)=>{
         fs.writeFileSync('./data.json', JSON.stringify(temp, null, 2))
         res.redirect('/')
 })
-/*
-route.post('/editData', (res, req) => {
-    console.log(res)
-    temp.forEach(t => {
-        if (t.id == res.data) {
-            obj = t
-        }
-    })
 
+//Remove data
+route.post('/deleteData/:id',async (req,res)=>{
 
-})*/
-
-function findBoking(id){
-    var obj = null;
-    temp.forEach(t=>{
-        if(t.id==id){
-            obj=t
-        }
-    })
-    return obj
-}
-
+    await console.log(req.body)
+     
+        const { id,persons, car, dateBooking, dateDelivery, observations } = req.body
+        console.log("ante de entrar, persona: "+persons)
+        await temp.forEach(t=>{
+            if(t.id==id){
+                temp.splice(id,1)
+                console.log("Eliminado")
+            }
+        })
+        fs.writeFileSync('./data.json', JSON.stringify(temp, null, 2))
+        res.redirect('/')
+})
 
 module.exports = route,temp;

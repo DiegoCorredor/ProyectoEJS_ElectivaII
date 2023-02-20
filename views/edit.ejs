@@ -4,9 +4,32 @@
 <head>
     <%-include('./templates/header')%>
         <script>
+            //'use strict'
+            //import fs from 'fs';
+            //const query = fs.readFileSync('./data.json')
+            //const temp = JSON.parse(query)
+
             function editing() {
                 var valueId = document.getElementById('person').value
-                console.log(valueId)
+                var z= document.getElementById('id')
+                var person = document.getElementById('p')
+                var car = document.getElementById('c')
+                var da=document.getElementById('dateBooking')
+                var db=document.getElementById('dateDelivery')
+                var des=document.getElementById('observations')
+                array= "<%=temp.data%>"
+                "<%temp.forEach(t=>{%>"
+                    var aux = "<%=t.id%>"
+                    if(aux==valueId){
+                        obj=valueId
+                        z.value="<%=t.persons%>"
+                        p.innerHTML="<%=t.persons%>"
+                        des.innerHTML="<%=t.observations%>"
+                        da.value="<%=t.booking%>"
+                        db.value="<%=t.delivery%>"
+                        car.innerHTML="<%=t.car%>"
+                    }
+                "<%})%>"
                 return valueId
             }
         </script>
@@ -32,20 +55,21 @@
                             <%})%>
                     </select>
                 </div>
-                <div class="col-3">
+                <!--div class="col-3">
                     <button class="btn btn-primary w-100" onclick="editing()"><i class="fas fa-search"></i>
                         Consultar</button>
-                </div>
+                </div-->
             </div>
             <hr>
             <%if(temp[1].id==1){%>
-                <form action="/editData" method="POST">
+                <form action="/editData/id" method="POST">
                     <div class="row">
+                        <input type="hidden" value="<%=temp.persons%>" id="id">
                         <div class="col-4">
                             <div class="mb-3 text-start">
                                 <label for="persons" class="form-label">Persona que solicita</label>
-                                <select name="persons" id="persons" class="form-control" disabled>
-                                    <option value=<%=temp.persons%>><%=temp[1].persons%>
+                                <select name="persons" id="persons" class="form-control">
+                                    <option name="p" id="p" value="<%=temp.persons%>"><%=temp[1].persons%>
                                     </option>
                                 </select>
                             </div>
@@ -55,7 +79,7 @@
                                 <label for="car" class="form-label">Auto que solicita</label>
                                 <select name="car" id="car" class="form-control">
                                     <%temp.forEach(temp=>{%>
-                                        <option value=<%=temp.car%>><%=temp.car%>
+                                        <option id="c" value=<%=temp.car%>><%=temp.car%>
                                         </option>
                                         <%})%>
 

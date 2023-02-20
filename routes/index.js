@@ -3,7 +3,7 @@ const route = require('express').Router()
 const fs = require('fs')
 const query = fs.readFileSync('./data.json')
 const temp = JSON.parse(query)
-var obj;
+var obj="";
 
 //Routes
 route.get('/', (req, res) => {
@@ -15,14 +15,42 @@ route.get('/newEntry', (req, res) => {
 route.get('/searchEntry', (req, res) => {
     res.render('search', { title: "Buscar reserva de auto :: SGRC", 'temp': temp })
 })
-route.get('/editEntry', (req, res) => {
-    res.render('edit', { title: "Editar reserva de auto :: SGRC", "temp": temp, "obj": obj })
+route.get('/editEntry/', (req, res) => {
+    /*try{
+        let id = req.params.id
+        let { persons, car, dateBooking, dateDelivery, observations } = req.body
+        temp.forEach(t=>{
+            if(t.id==id){
+                t.persons=persons
+                t.car=car
+                t.booking=dateBooking
+                t.delivery=dateDelivery
+                t.observations=observations
+                console.log("actualizado")
+                alert("actualizado")
+            }
+        })
+    }
+    catch{
+        res.status(400).send("No se pudo actualizar la reservacion")
+    }
+    */res.render('edit', { title: "Editar reserva de auto :: SGRC", "temp": temp, "obj": obj })
 
+})
+
+route.post('editById/:id',(res,req)=>{
+        
+    res.render('/', { title: "Holi de nuevo", "temp": temp, "obj": obj })
 })
 route.get('/delEntry', (req, res) => {
     res.render('delete', { title: "Eliminar reserva de auto :: SGRC", "temp": temp })
 })
 
+
+route.get('/getBoking/:id',(req,res)=>{
+    let id=findBoking(req.params.id)
+
+})
 
 
 //Insert data
@@ -54,13 +82,27 @@ route.post('/addBooking', (req, res) => {
 })
 
 //Edit data
-route.post('/editData',(req,res)=>{
-    
+route.post('/editData/:id',async (req,res)=>{
 
-    
-
-
-    res.redirect('/')
+    await console.log(req.body)
+     
+        const id = req.params.id
+        const { persons, car, dateBooking, dateDelivery, observations } = req.body
+        console.log("ante de entrar, persona: "+persons)
+        await temp.forEach(t=>{
+            if(t.id==id){
+                t.p=persons
+                t.car=car
+                t.booking=dateBooking
+                t.delivery=dateDelivery
+                t.observations=observations
+                console.log("actualizado")
+                console.log(car)
+                console.log(t.persons)
+            }
+        })
+        fs.writeFileSync('./data.json', JSON.stringify(temp, null, 2))
+        res.redirect('/')
 })
 /*
 route.post('/editData', (res, req) => {
@@ -74,5 +116,15 @@ route.post('/editData', (res, req) => {
 
 })*/
 
+function findBoking(id){
+    var obj = null;
+    temp.forEach(t=>{
+        if(t.id==id){
+            obj=t
+        }
+    })
+    return obj
+}
 
-module.exports = route;
+
+module.exports = route,temp;

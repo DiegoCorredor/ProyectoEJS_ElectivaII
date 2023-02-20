@@ -86,12 +86,11 @@ route.post('/editData/:id',async (req,res)=>{
 
     await console.log(req.body)
      
-        const id = req.params.id
-        const { persons, car, dateBooking, dateDelivery, observations } = req.body
+        const { id,persons, car, dateBooking, dateDelivery, observations } = req.body
         console.log("ante de entrar, persona: "+persons)
         await temp.forEach(t=>{
             if(t.id==id){
-                t.p=persons
+                t.persons=persons
                 t.car=car
                 t.booking=dateBooking
                 t.delivery=dateDelivery

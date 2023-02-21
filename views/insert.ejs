@@ -78,6 +78,12 @@
                         </div>
                     </div>
                 </div>
+                <%if(flag == false){%>
+                    <div class="alert alert-danger alert-dismissible fade show text-center fs-5" role="alert">
+                        <p class=""><i class="fas fas-alert"></i> <%=error%></p>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <%}%>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a href="/" class="btn btn-primary"><i class="fas fa-home"></i>  Inicio</a>
                     <a href="newEntry" class="btn btn-warning"><i class="fas fa-eraser"></i>  Limpiar</a>
